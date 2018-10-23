@@ -7,10 +7,16 @@ class Stack:
         return Stack(item, self)
 
     def isEmpty(self):
-        return self.item is None
+        return self.next is None    # self.item is None and
 
     def pop(self):
         return self.next
+
+    def reversed2(self, tmp=None):
+        if tmp is None:
+            return Stack().reversed2(self)
+        else:
+            return self.push(tmp.top()).reversed2(tmp.pop()) if not tmp.next.isEmpty() else self.push(tmp.top())
 
     def r(self, tmp):
         return self.push(tmp.top()).r(tmp.pop()) if not tmp.next.isEmpty() else self.push(tmp.top())
@@ -18,12 +24,19 @@ class Stack:
     def reversed(self):
         return Stack().r(self)
 
+    reversed = reversed2
+
     def top(self):
         return self.item
 
     def __iter__(self):
-        self.current = self
-        return self
+        try:
+            if self.lst:
+                return self.lst.__iter__()
+        except AttributeError:
+            self.lst = []
+            self.current = self
+            return self
 
     def __next__(self):
         if self.current.item is None:
@@ -31,6 +44,7 @@ class Stack:
         else:
             tmp = self.current
             self.current = self.current.next
+            self.lst.append(tmp)
             return tmp
 
     def __getitem__(self, key):
@@ -108,7 +122,9 @@ def main():
     print(Queue().push(1).push(2))
     print(Queue().push(1).push(2).push(3))
     print(Queue().push(1).push(2).push(3).pop())
-    print(Queue().push(1).push(2).push(3).pop().push(4))
+    x = Queue().push(1).push(2).push(3).pop().push(4)
+    print(x)
+    print(x)
     print(Queue().push(1).push(2).push(3).pop().push(4).pop())
     print(Queue().push(1).push(2).push(3).pop().push(4).pop().pop())
     print(Queue().push(1).push(2).push(3).pop().push(4).pop().pop().pop())
