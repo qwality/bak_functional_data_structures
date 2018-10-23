@@ -3,10 +3,6 @@ class Stack:
         self.item = item
         self.next = _next
 
-    # @staticmethod
-    # def empty():
-    # 	return Stack(None, None)
-
     def push(self, item):
         return Stack(item, self)
 
@@ -17,7 +13,6 @@ class Stack:
         return self.next
 
     def r(self, tmp):
-        # no tail call optimisation ( return statement result )
         return self.push(tmp.top()).r(tmp.pop()) if not tmp.next.isEmpty() else self.push(tmp.top())
 
     def reversed(self):
