@@ -30,7 +30,7 @@ class Stack:
         return self.item
 
     def __iter__(self):
-        if self.item is None:      #  porad nevim jestli item nebo next
+        if self.isEmpty():      #  porad nevim jestli item nebo next
             return
         else:
             yield self
@@ -48,22 +48,24 @@ class Queue:
         self.incoming = incoming
         self.outgoing = outgoing
 
-    # @staticmethod
-    # def empty():
-    # 	return Queue(Stack(), Stack())
-
     def isEmpty(self):
         # presume outgoing is never empty if incoming is not
         return self.outgoing.isEmpty()
 
     def push(self, item):
         # if both stacks are empty, push outgoing instead
-        return Queue(self.incoming,
-                     self.outgoing.push(item)) if self.incoming.isEmpty() and self.outgoing.isEmpty() else Queue(
-            self.incoming.push(item), self.outgoing)
+        if self.incoming.isEmpty() and self.outgoing.isEmpty():
+            return Queue(
+                self.incoming,
+                self.outgoing.push(item)
+            )
+        else:
+            return Queue(
+                self.incoming.push(item),
+                self.outgoing
+            )
 
     def pop(self):
-
         if not self.isEmpty():
             tmp = Queue(self.incoming, self.outgoing.pop())
             if tmp.isEmpty() and not tmp.incoming.isEmpty():
