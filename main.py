@@ -118,6 +118,7 @@ def main():
     print(Queue().push(1).push(2).push(3).pop().push(4).pop().pop())
     print(Queue().push(1).push(2).push(3).pop().push(4).pop().pop().pop())
     # nejaky srandovni komentar
+    # dalsi srandovni komentar
 
 
 if __name__ == "__main__":
