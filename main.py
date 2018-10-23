@@ -1,4 +1,4 @@
-from queue import Queue
+from __queue import Queue
 
 
 def main():
