@@ -1,11 +1,11 @@
 class Stack:
-	def __init__(self, item, _next):
+	def __init__(self, item=None, _next=None):
 		self.item = item
 		self.next = _next
 
-	@staticmethod
-	def empty():
-		return Stack(None, None)
+	# @staticmethod
+	# def empty():
+	# 	return Stack(None, None)
 
 	def push(self, item):
 		return Stack(item, self)
@@ -21,7 +21,7 @@ class Stack:
 		return self.push(tmp.top()).r(tmp.pop()) if not tmp.next.isEmpty() else self.push(tmp.top())
 
 	def reversed(self):
-		return Stack.empty().r(self)
+		return Stack().r(self)
 
 	def top(self):
 		return self.item
@@ -46,13 +46,13 @@ class Stack:
 
 
 class Queue:
-	def __init__(self, incoming, outgoing):
+	def __init__(self, incoming=Stack(), outgoing=Stack()):
 		self.incoming = incoming
 		self.outgoing = outgoing
 
-	@staticmethod
-	def empty():
-		return Queue(Stack.empty(), Stack.empty())
+	# @staticmethod
+	# def empty():
+	# 	return Queue(Stack(), Stack())
 
 	def isEmpty(self):
 		# presume outgoing is never empty if incoming is not
@@ -68,18 +68,18 @@ class Queue:
 			tmp = Queue(self.incoming, self.outgoing.pop())
 			if tmp.isEmpty() and not tmp.incoming.isEmpty():
 				# reversing if outgoing is empty and incoming is not
-				return Queue(Stack.empty(), tmp.incoming.reversed())
+				return Queue(Stack(), tmp.incoming.reversed())
 			return tmp
 		else:
 			return self
 
 		# pops element, if there is none reverse, then return
-		if not self.outgoing.isEmpty():
-			return Queue(self.incoming, self.outgoing.pop())
-		elif not self.incoming.isEmpty():
-			return Queue(Stack.empty(), self.incoming.reversed().pop())
-		else:
-			return self
+		# if not self.outgoing.isEmpty():
+		# 	return Queue(self.incoming, self.outgoing.pop())
+		# elif not self.incoming.isEmpty():
+		# 	return Queue(Stack.empty(), self.incoming.reversed().pop())
+		# else:
+		# 	return self
 
 	def top(self):
 		return self.incoming.top()
@@ -107,14 +107,14 @@ def main():
 	# print(Queue.empty().push(1))
 	# print(Queue.empty().push(1).pop())
 	print("--final test--")
-	print(Queue.empty().push(1))
-	print(Queue.empty().push(1).push(2))
-	print(Queue.empty().push(1).push(2).push(3))
-	print(Queue.empty().push(1).push(2).push(3).pop())
-	print(Queue.empty().push(1).push(2).push(3).pop().push(4))
-	print(Queue.empty().push(1).push(2).push(3).pop().push(4).pop())
-	print(Queue.empty().push(1).push(2).push(3).pop().push(4).pop().pop())
-	print(Queue.empty().push(1).push(2).push(3).pop().push(4).pop().pop().pop())
+	print(Queue().push(1))
+	print(Queue().push(1).push(2))
+	print(Queue().push(1).push(2).push(3))
+	print(Queue().push(1).push(2).push(3).pop())
+	print(Queue().push(1).push(2).push(3).pop().push(4))
+	print(Queue().push(1).push(2).push(3).pop().push(4).pop())
+	print(Queue().push(1).push(2).push(3).pop().push(4).pop().pop())
+	print(Queue().push(1).push(2).push(3).pop().push(4).pop().pop().pop())
 
 
 if __name__ == "__main__":
