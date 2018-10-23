@@ -7,7 +7,7 @@ class Stack:
         return Stack(item, self)
 
     def isEmpty(self):
-        return self.next is None    # self.item is None and
+            return self.item is None       #  porad nevim jestli item nebo next
 
     def pop(self):
         return self.next
@@ -30,22 +30,11 @@ class Stack:
         return self.item
 
     def __iter__(self):
-        try:
-            if self.lst:
-                return self.lst.__iter__()
-        except AttributeError:
-            self.lst = []
-            self.current = self
-            return self
-
-    def __next__(self):
-        if self.current.item is None:
-            raise StopIteration
+        if self.item is None:      #  porad nevim jestli item nebo next
+            return
         else:
-            tmp = self.current
-            self.current = self.current.next
-            self.lst.append(tmp)
-            return tmp
+            yield self
+            yield from self.next.__iter__()
 
     def __getitem__(self, key):
         return self.item if key is 0 else self.next[key - 1]
