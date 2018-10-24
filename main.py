@@ -1,4 +1,6 @@
 from __queue import Queue
+from __queue2 import Queue2
+from __stack import Stack
 
 
 def main():
@@ -16,6 +18,7 @@ def main():
     # d = c.pop()
     # print(Queue.empty().push(1))
     # print(Queue.empty().push(1).pop())
+    # print(Stack().reversed())
     print("--final test--")
     print(Queue().push(1))
     print(Queue().push(1).push(2))

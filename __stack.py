@@ -15,8 +15,12 @@ class Stack:
     def reversed(self, tmp=None):
         if tmp is None:
             return Stack().reversed(self)
+        elif tmp.isEmpty():
+            return self
+        elif tmp.next.isEmpty():
+            return self.push(tmp.top())
         else:
-            return self.push(tmp.top()).reversed(tmp.pop()) if not tmp.next.isEmpty() else self.push(tmp.top())
+            return self.push(tmp.top()).reversed(tmp.pop())
 
     def top(self):
         return self.item
