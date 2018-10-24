@@ -48,4 +48,7 @@ class Queue:
         return self.outgoing.top()
 
     def __str__(self):
-        return str(self.incoming) + str(self.outgoing)
+        return "{self.incoming!s}{self.outgoing!s}".format(self=self)
+
+    def __repr__(self):
+        return "{self.__class__.__name__}({self.incoming!r}, {self.outgoing!r})".format(self=self)

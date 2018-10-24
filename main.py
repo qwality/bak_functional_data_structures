@@ -23,7 +23,7 @@ def main():
     print(Queue().push(1).push(2).push(3).pop())
     x = Queue().push(1).push(2).push(3).pop().push(4)
     print(x)
-    print(x)
+    print(repr(x))
     print(Queue().push(1).push(2).push(3).pop().push(4).pop())
     print(Queue().push(1).push(2).push(3).pop().push(4).pop().pop())
     print(Queue().push(1).push(2).push(3).pop().push(4).pop().pop().pop())
