@@ -48,7 +48,7 @@ class Queue:
         return self.outgoing.top()
 
     def __str__(self):
-        return "{self.incoming!s}{R!s}>".format(R=list(self.outgoing.reversed()), self=self)
+        return "{self.incoming!s}{R!s}".format(R=list(self.outgoing.reversed()), self=self)
 
     def __repr__(self):
         return "{self.__class__.__name__}({self.incoming!r}, {self.outgoing!r})".format(self=self)

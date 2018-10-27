@@ -42,7 +42,7 @@ class Stack:
         return self.item if key is 0 else self.next[key - 1]
 
     def __str__(self):
-        return ">{0!s}".format(list(self))
+        return "{0!s}".format(list(self))
 
     def __repr__(self):
         return "{self.__class__.__name__}({self.item!s}, {self.next!r})".format(self=self)
