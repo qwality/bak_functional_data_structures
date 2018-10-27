@@ -2,53 +2,53 @@ from __stack import Stack
 
 
 class Queue:
-    def __init__(self, incoming=Stack(), outgoing=Stack()):
-        self.incoming = incoming
-        self.outgoing = outgoing
+    def __init__(self, tail=Stack(), head=Stack()):
+        self.tail = tail
+        self.head = head
 
     def isEmpty(self):
-        # presume outgoing is never empty if incoming is not
-        return self.outgoing.isEmpty()
+        # presume head is never empty if tail is not
+        return self.head.isEmpty()
 
     def push(self, item):
-        # if both stacks are empty, push outgoing instead
-        if self.incoming.isEmpty() and self.outgoing.isEmpty():
+        # if both stacks are empty, push head instead
+        if self.tail.isEmpty() and self.head.isEmpty():
             return Queue(
-                self.incoming,
-                self.outgoing.push(item)
+                self.tail,
+                self.head.push(item)
             )
         else:
             return Queue(
-                self.incoming.push(item),
-                self.outgoing
+                self.tail.push(item),
+                self.head
             )
 
     def pop(self):
         if not self.isEmpty():
-            tmp = Queue(self.incoming, self.outgoing.pop())
-            if tmp.isEmpty() and not tmp.incoming.isEmpty():
-                # reversing if outgoing is empty and incoming is not
-                return Queue(Stack(), tmp.incoming.reversed())
+            tmp = Queue(self.tail, self.head.pop())
+            if tmp.isEmpty() and not tmp.tail.isEmpty():
+                # reversing if head is empty and tail is not
+                return Queue(Stack(), tmp.tail.reversed())
             return tmp
         else:
             return self
 
     # pops element, if there is none reverse, then return
-    # if not self.outgoing.isEmpty():
-    # 	return Queue(self.incoming, self.outgoing.pop())
-    # elif not self.incoming.isEmpty():
-    # 	return Queue(Stack.empty(), self.incoming.reversed().pop())
+    # if not self.head.isEmpty():
+    # 	return Queue(self.tail, self.head.pop())
+    # elif not self.tail.isEmpty():
+    # 	return Queue(Stack.empty(), self.tail.reversed().pop())
     # else:
     # 	return self
 
     def top(self):
-        return self.incoming.top()
+        return self.tail.top()
 
     def bot(self):
-        return self.outgoing.top()
+        return self.head.top()
 
     def __str__(self):
-        return "{self.incoming!s}{R!s}".format(R=list(self.outgoing.reversed()), self=self)
+        return "{self.head!s}{R!s}".format(R=list(self.tail.reversed()), self=self)
 
     def __repr__(self):
-        return "{self.__class__.__name__}({self.incoming!r}, {self.outgoing!r})".format(self=self)
+        return "{self.__class__.__name__}({self.head!r}, {self.tail!r})".format(self=self)
