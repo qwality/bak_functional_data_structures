@@ -2,9 +2,10 @@ from __stack import Stack
 
 
 class Queue:
-    def __init__(self, tail=Stack(), head=Stack()):
-        self.tail = tail
+    def __init__(self, head=Stack(), tail=Stack()):
+        # if created with just head its broken
         self.head = head
+        self.tail = tail
 
     def isEmpty(self):
         # presume head is never empty if tail is not
@@ -14,21 +15,21 @@ class Queue:
         # if both stacks are empty, push head instead
         if self.tail.isEmpty() and self.head.isEmpty():
             return Queue(
-                self.tail,
-                self.head.push(item)
+                self.head.push(item),
+                self.tail
             )
         else:
             return Queue(
-                self.tail.push(item),
-                self.head
+                self.head,
+                self.tail.push(item)
             )
 
     def pop(self):
         if not self.isEmpty():
-            tmp = Queue(self.tail, self.head.pop())
+            tmp = Queue(self.head.pop(), self.tail)
             if tmp.isEmpty() and not tmp.tail.isEmpty():
                 # reversing if head is empty and tail is not
-                return Queue(Stack(), tmp.tail.reversed())
+                return Queue(tmp.tail.reversed(), Stack())
             return tmp
         else:
             return self
@@ -48,7 +49,7 @@ class Queue:
         return self.head.top()
 
     def __str__(self):
-        return "{self.head!s}{R!s}".format(R=list(self.tail.reversed()), self=self)
+        return "{self.head!s}{T!s}".format(T=list(self.tail.reversed()), self=self)
 
     def __repr__(self):
         return "{self.__class__.__name__}({self.head!r}, {self.tail!r})".format(self=self)
