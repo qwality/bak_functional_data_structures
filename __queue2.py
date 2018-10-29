@@ -14,7 +14,7 @@ class Pseudo:
         return Pseudo(
             self._a.push(self.a_.top()),
             self.a_.pop()
-        ) #if not self.isEmpty() else self
+        )
 
     def __str__(self):
         # return self.__repr__()
@@ -30,6 +30,7 @@ class Queue2(Queue):
         self.d = d
 
     def push(self, item):
+
         d = self.d - 1
         tmp = Queue2(
             self.head,
@@ -41,12 +42,12 @@ class Queue2(Queue):
         else:
             return Phase1.cons(tmp)
 
-    def r(self):
-        return Queue2(
-            head=self.tail.reversed(),
-            tail=Stack(),
-            d=len(list(self.tail))
-        )
+    # def r(self):
+    #     return Queue2(
+    #         head=self.tail.reversed(),
+    #         tail=Stack(),
+    #         d=len(list(self.tail))
+    #     )
 
     def pop(self):
         d = self.d - 1
@@ -87,26 +88,16 @@ class Phase1(Queue):
         tmp = Phase1(
             queue2.head,
             Stack(),
-            *Phase1.step(
+            *Phase1.step(*Phase1.step(
                 Pseudo(Stack(), queue2.head),
                 Pseudo(Stack(), queue2.tail),
                 queue2.d
-            )
-        )
-        if tmp.t.isEmpty():
-            return Phase2.cons(Phase1(
-                tmp.head,
-                tmp.tail,
-                *tmp.step(
-                    tmp.h,
-                    tmp.t,
-                    tmp.d
-                )
             ))
-        else:
+        )
+        if not tmp.t.isEmpty():
             return tmp
-
-
+        else:
+            return Phase2.cons(tmp)
 
     def push(self, item):
         tmp = Phase1(
@@ -156,34 +147,32 @@ class Phase2(Queue):
         self.d = d
 
     @staticmethod
+    def step(p, d):
+        if not p.isEmpty() and d > 0:
+            return p.inc_rev(), d - 1
+        else:
+            return p, d
+
+    @staticmethod
     def cons(phase1):
         tmp = Phase2(
             phase1.head,
             phase1.tail,
-            Pseudo(phase1.t._a, phase1.h._a),
-            phase1.d
+            *Phase2.step(*Phase2.step(
+                Pseudo(phase1.t._a, phase1.h._a),
+                phase1.d
+            ))
         )
-        if tmp.p.isEmpty():
+        if tmp.d == 0:
             return tmp.g()
         else:
             return tmp
-        # if not tmp.p.isEmpty():
-        #     return tmp
-        # else:
-        #     "slon"
-
-    @staticmethod
-    def step(p, d):
-        if not p.isEmpty():
-            return p.inc_rev(), d - 1
-        else:
-            return p, d
 
     def g(self):
         return Queue2(
             self.p._a,
             self.tail,
-            len(list(self.p._a))
+            len(list(self.p._a)) - len(list(self.tail))
         )
 
     def push(self, item):
@@ -195,29 +184,24 @@ class Phase2(Queue):
                 self.d
             ))
         )
-        if self.d == 1:
+        if tmp.d == 0:
             return tmp.g()
         else:
             return tmp
 
     def pop(self):
-        d = self.d - 1
-        if d <= 0:
-            return Phase2(
-                self.head.pop(),
-                self.tail,
+        tmp = Phase2(
+            self.head.pop(),
+            self.tail,
+            *self.step(*self.step(
                 self.p,
-                self.d
-            ).g()
+                self.d - 1
+            ))
+        )
+        if tmp.d == 0:
+            return tmp.g()
         else:
-            return Phase2(
-                self.head.pop(),
-                self.tail,
-                *self.step(*self.step(
-                    self.p,
-                    d
-                ))
-            )
+            return tmp
 
     def __str__(self):
         return self.__repr__()

@@ -55,12 +55,33 @@ def main():
     # print(A, B.tail)
     # a = Pseudo(Stack(), Stack().push2(1,2,3,4,5,6))
     # print(a, *Phase1.step(*Phase1.step(a, a, 0)), sep="\n")
-    a = Queue2()
-    b = a.push(1)
-    c = b.push(2).push(3)
-    d = c.pop()
-    e = d.pop()
-    print(a, b, c, d, e, sep="\n")
+
+    def a(lst):
+        prev = Queue2()
+        for i in lst:
+            if i != 0:
+                prev = prev.push(i)
+                print(prev)
+            else:
+                prev = prev.pop()
+                print(prev)
+
+    a([1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 0])
+
+    # a = Queue2()
+    # b = a.push(1)
+    # c = b.push(2)
+    # c1 = c.push(3)
+    # d = c1.pop()
+    # e = d.pop()
+    # e1 = e.push(4)
+    # e2 = e1.push(5)
+    # e3 = e2.push(6)
+    # e4 = e3.push(7)
+    # e5 = e4.push(8)
+    # e6 = e5.push(9)
+    # e7 = e6.push(10)
+    # print(a, b, c, c1, d, e, e1, e2, e3, e4, e5, e6, e7, sep="\n")
 
 
 
