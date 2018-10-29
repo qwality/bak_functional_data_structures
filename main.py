@@ -39,16 +39,29 @@ def main():
     # print(a, b, c, sep='\n')
 
     print("--Queue 2--")
-    a = Queue2()
-    b = a.push(1)
-    b1 = b.push(2)
-    b2 = b1.push(3)
-    c = b2.r()
-    d = c.pop().push(4)
-    print(a, b, b1, c, d, sep="\n")
+    # a = Queue2()
+    # a.head = Stack().push2(1,2,3,4)
+    # a.tail = Stack().push2(5,6,7,8)
+    # a.d = 0
+    # b = a.push(10)
+    # b1 = b.push(20)
+    # b2 = b1.push(30)
+    # b3 = b2.pop()
+    # c = b2.r()
+    # d = c.pop().push(4)
+    # print(a, b, b1, b2, b3, sep="\n")
     # A = Queue2(Stack(1, Stack(None, None)))
     # B = Phase2(A)
     # print(A, B.tail)
+    # a = Pseudo(Stack(), Stack().push2(1,2,3,4,5,6))
+    # print(a, *Phase1.step(*Phase1.step(a, a, 0)), sep="\n")
+    a = Queue2()
+    b = a.push(1)
+    c = b.push(2).push(3)
+    d = c.pop()
+    e = d.pop()
+    print(a, b, c, d, e, sep="\n")
+
 
 
 
