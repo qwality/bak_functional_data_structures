@@ -1,8 +1,2 @@
-
-.idea/workspace.xml
-.idea/vcs.xml
-.idea/bak_functional_data_structures.iml
-.idea/misc.xml
-.idea/modules.xml
-__pycache__/queue.cpython-37.pyc
-__pycache__/stack.cpython-37.pyc
+__pycache__/
+.idea/
