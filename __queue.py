@@ -34,14 +34,6 @@ class Queue:
         else:
             return self
 
-    # pops element, if there is none reverse, then return
-    # if not self.head.isEmpty():
-    # 	return Queue(self.tail, self.head.pop())
-    # elif not self.tail.isEmpty():
-    # 	return Queue(Stack.empty(), self.tail.reversed().pop())
-    # else:
-    # 	return self
-
     def top(self):
         return self.tail.top()
 
@@ -49,7 +41,7 @@ class Queue:
         return self.head.top()
 
     def __str__(self):
-        return "{self.head!s}{T!s}".format(T=list(self.tail.reversed()), self=self)
+        return "{self.head!s} {T!s}".format(T=list(self.tail.reversed()), self=self)
 
     def __repr__(self):
         return "{self.__class__.__name__}({self.head!r}, {self.tail!r})".format(self=self)

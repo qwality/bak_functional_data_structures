@@ -8,9 +8,9 @@ class Stack:
 
     def push2(self, *items):
         if len(items) is 1:
-            return Stack(items[0], self)
+            return Stack(items[-1], self)
         else:
-            return Stack(items[0], self).push2(*items[1:])
+            return Stack(items[-1], self).push2(*items[:-1])
 
     def isEmpty(self):
         return self.item is None       # porad nevim jestli item nebo next
