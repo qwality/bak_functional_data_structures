@@ -21,6 +21,8 @@ def test(tst, lst, fnc=lambda x: x):
 
 def main():
 
+    # todo iterator for queues, reversed-jen obratit poradi yieldu, __str__ pomoci __iter__
+
     print("--Stack--")
     # test(Stack(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0])
 
