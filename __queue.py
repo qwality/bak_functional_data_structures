@@ -1,11 +1,17 @@
-from __stack import Stack
+from __stack import *
 # from __queue import Queue
+
+stack = Stack2.empty()
 
 
 class Pseudo:
-    def __init__(self, head=Stack(), tail=Stack()):
+    def __init__(self, head=stack, tail=stack):
         self.head = head
         self.tail = tail
+
+    @staticmethod
+    def empty_stack():
+        return stack
 
     def isEmpty(self):
         return self.tail.isEmpty()
@@ -18,21 +24,21 @@ class Pseudo:
 
     def __str__(self):
         return "[{H}{sep}{T}]".format(
-            T=", ".join(map(str, self.tail.reversed())),
-            H=", ".join(map(str, self.head)),
+            T=", ".join(map(str, reversed(self.tail))),
+            H=", ".join(map(str, iter(self.head))),
             sep=", " if not self.tail.isEmpty() else ""
         )
 
     def __repr__(self, class_name=True):
         return "{class_name}\t{self.head!s} {T!s}".format(
             class_name=self.__class__.__name__ if class_name else "",
-            T=list(self.tail.reversed()),
+            T=list(reversed(self.tail)),
             self=self
         )
 
 
 class Queue(Pseudo):
-    def __init__(self, head=Stack(), tail=Stack()):
+    def __init__(self, head=Pseudo.empty_stack(), tail=Pseudo.empty_stack()):
         super().__init__(head, tail)
 
     def isEmpty(self):
@@ -54,7 +60,7 @@ class Queue(Pseudo):
         if not self.isEmpty():
             tmp = Queue(self.head.pop(), self.tail)
             if tmp.isEmpty() and not tmp.tail.isEmpty():
-                return Queue(tmp.tail.reversed(), Stack())
+                return Queue(tmp.tail.reversed(), Pseudo.empty_stack())
             return tmp
         else:
             return self
@@ -67,7 +73,7 @@ class Queue(Pseudo):
 
 
 class Queue2(Queue):
-    def __init__(self, head=Stack(), tail=Stack(), d=0):
+    def __init__(self, head=Pseudo.empty_stack(), tail=Pseudo.empty_stack(), d=0):
         super().__init__(head, tail)
         self.d = d
 
@@ -125,8 +131,8 @@ class Phase1(Queue2):
             Stack(),
             *Phase1.step(*Phase1.step(
                 queue2.d,
-                Pseudo(Stack(), queue2.head),
-                Pseudo(Stack(), queue2.tail)
+                Pseudo(Pseudo.empty_stack(), queue2.head),
+                Pseudo(Pseudo.empty_stack(), queue2.tail)
             ))
         )
         if not tmp.t.isEmpty():
@@ -171,10 +177,10 @@ class Phase1(Queue2):
             ", " if not self.t.tail.isEmpty() else "",
             ", " if not self.t.head.isEmpty() else "",
             ", " if not self.tail.isEmpty() else "",
-            head=", ".join(map(str, self.head)),
-            t=", ".join(map(str, self.t.tail.reversed())),
-            h=", ".join(map(str, self.t.head)),
-            tail=", ".join(map(str, self.tail.reversed()))
+            head=", ".join(map(str, iter(self.head))),
+            t=", ".join(map(str, reversed(self.t.tail))),
+            h=", ".join(map(str, iter(self.t.head))),
+            tail=", ".join(map(str, reversed(self.tail)))
         )
 
     def __repr__(self, class_name=True):
@@ -252,9 +258,9 @@ class Phase2(Queue2):
         return "[{t}{0}{h}{1}{T}]".format(
             ", " if not self.p.tail.isEmpty() else "",
             ", " if not self.tail.isEmpty() else "",
-            t=", ".join(map(str, reversed(list(self.p.tail)[:self.d]))),
-            h=", ".join(map(str, self.p.head)),
-            T=", ".join(map(str, self.tail.reversed()))
+            t=", ".join(map(str, reversed(list(iter(self.p.tail))[:self.d]))),
+            h=", ".join(map(str, iter(self.p.head))),
+            T=", ".join(map(str, reversed(self.tail)))
         )
 
     def __repr__(self, class_name=True):

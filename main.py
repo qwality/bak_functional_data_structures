@@ -1,4 +1,4 @@
-from __queue2 import *
+from __queue import *
 from functools import reduce
 from __stack import *
 
@@ -25,33 +25,42 @@ def main():
     # todo iterator for queues, reversed-jen obratit poradi yieldu, __str__ pomoci __iter__
 
     print("--Stack--")
-    a = test(Stack(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0])
-    b = list(reversed(a))
-
-    print(a, b, sep="\n")
-
-    c = Stack2_item(0, Stack2_item(1, None))
-
-    for i in c.reversed():
-        print(i)
-
-    # print("\n--Pseudo--")
-    # pseudo = Pseudo(Stack().push2(1, 2, 3), Stack().push2(6, 5, 4))
-    # print(pseudo, repr(pseudo), sep="\n")
+    # a = test(Stack2(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0])
+    # b = list(reversed(a))
     #
-    # print("\n--Queue--")
-    # test(Queue(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0], compose(print, str))
+    # # a = Stack2.empty().push(0,1,2,3,4,5,6,7,8,9,10)
+    # # b = list(reversed(a))
+    # print(a, b, a.reversed(), sep="\n")
+    # print(test(Stack(), [1, 2, 3, 0, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0], print))
+    # print(test(Stack2.empty(), [1, 2, 3, 0, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0], print))
+
+    # c = Stack2(0, Stack2(1, Stack2(2, None)))
+
+    # for i in c:
+    #     print(i.item)
     #
-    # print("\n--Queue 2--")
-    # test(Queue2(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0], compose(print, repr))
-    # print("Queue2	[4, 5, 7, 8, 9, 10] [11], d=5")
+    # for i in reversed(c):
+    #     print(i.item)
+
+    print("\n--Pseudo--")
+    pseudo = Pseudo(Stack().push2(1, 2, 3), Stack().push2(6, 5, 4))
+    print(pseudo, repr(pseudo), sep="\n")
+
+    print("\n--Queue--")
+    test(Queue(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0], compose(print, str))
+    print("[4, 5, 7, 8, 9, 10, 11]")
     #
-    # print("\n--tests--")
-    # print(test(
-    #     Queue2(),
-    #     [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-    #     compose(print, repr)
-    # ))
+    print("\n--Queue 2--")
+    test(Queue2(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0], compose(print, repr))
+    print("Queue2	[4, 5, 7, 8, 9, 10] [11], d=5")
+
+    print("\n--tests--")
+    print("\nstr:\t%s" % test(
+        Queue2(),
+        [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        compose(print, repr)
+    ))
+    print("ref:\t[3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]")
 
 
 if __name__ == "__main__":
