@@ -1,1 +1,2 @@
 # todo iterator for queues, reversed-jen obratit poradi yieldu, __str__ pomoci __iter__
+# misto ptani se na neprazdnost, try catch ?

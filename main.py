@@ -1,5 +1,6 @@
 from __queue2 import *
 from functools import reduce
+from __stack import *
 
 
 def compose(*args):
@@ -24,25 +25,33 @@ def main():
     # todo iterator for queues, reversed-jen obratit poradi yieldu, __str__ pomoci __iter__
 
     print("--Stack--")
-    # test(Stack(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0])
+    a = test(Stack(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0])
+    b = list(reversed(a))
 
-    print("\n--Pseudo--")
-    pseudo = Pseudo(Stack().push2(1, 2, 3), Stack().push2(6, 5, 4))
-    print(pseudo, repr(pseudo), sep="\n")
+    print(a, b, sep="\n")
 
-    print("\n--Queue--")
-    test(Queue(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0], compose(print, str))
+    c = Stack2_item(0, Stack2_item(1, None))
 
-    print("\n--Queue 2--")
-    test(Queue2(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0], compose(print, repr))
-    print("Queue2	[4, 5, 7, 8, 9, 10] [11], d=5")
+    for i in c.reversed():
+        print(i)
 
-    print("\n--tests--")
-    print(test(
-        Queue2(),
-        [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-        compose(print, repr)
-    ))
+    # print("\n--Pseudo--")
+    # pseudo = Pseudo(Stack().push2(1, 2, 3), Stack().push2(6, 5, 4))
+    # print(pseudo, repr(pseudo), sep="\n")
+    #
+    # print("\n--Queue--")
+    # test(Queue(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0], compose(print, str))
+    #
+    # print("\n--Queue 2--")
+    # test(Queue2(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0], compose(print, repr))
+    # print("Queue2	[4, 5, 7, 8, 9, 10] [11], d=5")
+    #
+    # print("\n--tests--")
+    # print(test(
+    #     Queue2(),
+    #     [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+    #     compose(print, repr)
+    # ))
 
 
 if __name__ == "__main__":
