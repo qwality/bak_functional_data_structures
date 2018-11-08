@@ -1,21 +1,25 @@
 from __stack import *
-# from __queue import Queue
 
-stack = Stack2.empty()
+stack = Stack2.empty()  # Stack() or Stack2.empty()
 
 
-class Pseudo:
+class Pseudo:   # pseudoQueue, base class for queue and serves where push and pop are not needed
     def __init__(self, head=stack, tail=stack):
         self.head = head
         self.tail = tail
 
+    # Stack() or Stack2.empty()
     @staticmethod
     def empty_stack():
         return stack
 
+    # is empty if tail is empty (presumes that tail is never empty if head is not)
+    # therefore is empty only if both tail and head are empty
     def isEmpty(self):
         return self.tail.isEmpty()
 
+    # performs one step of incremental reverse
+    # shouldn't be called on empty
     def inc_rev(self):
         return Pseudo(
             self.head.push(self.tail.top()),
@@ -37,13 +41,15 @@ class Pseudo:
         )
 
 
-class Queue(Pseudo):
+class Queue(Pseudo):    # implementation with good amorthized performance
     def __init__(self, head=Pseudo.empty_stack(), tail=Pseudo.empty_stack()):
         super().__init__(head, tail)
 
+    # reversed logic from Pseudo
     def isEmpty(self):
         return self.head.isEmpty()
 
+    # push to tail, but if it is first push, then push to head
     def push(self, item):
         if self.tail.isEmpty() and self.head.isEmpty():
             return Queue(
@@ -56,6 +62,7 @@ class Queue(Pseudo):
                 self.tail.push(item)
             )
 
+    # pop and if the result would have empty head, replace it with reversed tail
     def pop(self):
         if not self.isEmpty():
             tmp = Queue(self.head.pop(), self.tail)
@@ -72,7 +79,7 @@ class Queue(Pseudo):
         return self.head.top()
 
 
-class Queue2(Queue):
+class Queue2(Queue):    # real-time queue implementation
     def __init__(self, head=Pseudo.empty_stack(), tail=Pseudo.empty_stack(), d=0):
         super().__init__(head, tail)
         self.d = d
@@ -219,11 +226,12 @@ class Phase2(Queue2):
         else:
             return tmp
 
+    # not finished method
     def g(self):
         return Queue2(
             self.p.head,
             self.tail,
-            len(list(self.p.head)) - len(list(self.tail))
+            len(list(self.p.head)) - len(list(self.tail))   # shouldn't be counted from len (ruining complexity)
         )
 
     def push(self, item):

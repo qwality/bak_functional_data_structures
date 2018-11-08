@@ -4,7 +4,7 @@ class Stack:
         self.next = _next
 
     def isEmpty(self):
-        return self.item is None       # porad nevim jestli item nebo next
+        return self.item is None       # don't know which of checking next or item is better
 
     def push(self, item):
         return Stack(item, self)
@@ -32,14 +32,14 @@ class Stack:
         return self.item
 
     def __reversed__(self):
-        if self.isEmpty():      # porad nevim jestli item nebo next
+        if self.isEmpty():
             return
         else:
             yield from self.next.__reversed__()
             yield self.item
 
     def __iter__(self):
-        if self.isEmpty():      # porad nevim jestli item nebo next
+        if self.isEmpty():
             return
         else:
             yield self.item
@@ -55,7 +55,7 @@ class Stack:
         return "{self.__class__.__name__}({self.item!s}, {self.next!r})".format(self=self)
 
 
-class PseudoStack:
+class PseudoStack:  # empty Stack
     def isEmpty(self):
         return True
 
@@ -125,13 +125,14 @@ class Stack2(PseudoStack):
     def reversed(self):
         return self.rec_inc_rev(self)
 
-    def __reversed__(self):
-        try:
-            yield from self._next.__reversed__()
-        except AttributeError:
-            pass
-        finally:
-            yield self.item
+    def __reversed__(self):     # returns true representation or strict iterable
+        return self.reversed()
+        # try:
+        #     yield from self._next.__reversed__()
+        # except AttributeError:
+        #     pass
+        # finally:
+        #     yield self.item
 
     def __iter__(self):
         try:

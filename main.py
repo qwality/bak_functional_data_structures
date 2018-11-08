@@ -20,11 +20,13 @@ def test(tst, lst, fnc=lambda x: x):
     return prev
 
 
+# serves testing purposes
 def main():
+    # pass
 
-    # todo iterator for queues, reversed-jen obratit poradi yieldu, __str__ pomoci __iter__
+    # todo pri pouziti reverse(Queue2) should use reverse(iter(Queue2)), despite result is exactly same
 
-    print("--Stack--")
+    # print("--Stack--")
     # a = test(Stack2(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0])
     # b = list(reversed(a))
     #
@@ -61,6 +63,9 @@ def main():
         compose(print, repr)
     ))
     print("ref:\t[3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]")
+
+    for i in Stack2(0):
+        print(i)
 
 
 if __name__ == "__main__":
