@@ -1,1 +1,2 @@
 # todo misto ptani se na neprazdnost, try catch ?
+# todo pri pouziti reverse(Queue2) should use reverse(iter(Queue2)), despite result is exactly same

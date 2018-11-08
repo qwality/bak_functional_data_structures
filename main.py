@@ -24,8 +24,6 @@ def test(tst, lst, fnc=lambda x: x):
 def main():
     # pass
 
-    # todo pri pouziti reverse(Queue2) should use reverse(iter(Queue2)), despite result is exactly same
-
     # print("--Stack--")
     # a = test(Stack2(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0])
     # b = list(reversed(a))
