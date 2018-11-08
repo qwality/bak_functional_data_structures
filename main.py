@@ -23,7 +23,6 @@ def test(tst, lst, fnc=lambda x: x):
 # serves testing purposes
 def main():
     # pass
-
     # print("--Stack--")
     # a = test(Stack2(), [1, 2, 3, 0, 0, 4, 5, 7, 8, 9, 10, 11, 0])
     # b = list(reversed(a))
